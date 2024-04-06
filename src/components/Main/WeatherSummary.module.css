@@ -1,0 +1,55 @@
+.summary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 25px;
+}
+
+.icon {
+  height: 150px;
+  width: 210px;
+}
+
+.metrics {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  padding-left: 80px;
+  padding-right: 80px;
+  border-bottom: solid 3.5px rgba(0, 0, 0, 0.115);
+}
+
+.temperature {
+  font-size: 3rem;
+  margin: 0;
+}
+.status {
+  font-size: 1.3rem;
+  margin-top: 0px;
+  text-align: center;
+}
+
+.data {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  gap: 5px;
+}
+
+.date {
+  flex: 0 1;
+  margin: 0;
+}
+.time {
+  margin: 0;
+  font-size: 1.4rem;
+}
+.day {
+  margin: 0;
+}
+
+.location {
+  position: end;
+}

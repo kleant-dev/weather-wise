@@ -1,0 +1,11 @@
+.info-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 20%;
+}
