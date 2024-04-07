@@ -1,10 +1,10 @@
 import styles from "./Card.module.css";
 
-function Card({ title, children }) {
+function Card({ title, imageSrc, children }) {
   return (
     <div className={styles.card}>
-      <p>{title}</p>
-      {children}
+      <p className={styles.title}>{title}</p>
+      <div className={styles.children}>{children}</div>
     </div>
   );
 }

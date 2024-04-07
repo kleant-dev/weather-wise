@@ -1,11 +1,32 @@
 .info-cards {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 20px;
+  column-gap: 32px;
+  row-gap: 64px;
+  padding: 12px;
 }
 
 .right {
   display: flex;
   flex-direction: column;
   flex: 1 1 20%;
+}
+
+.header {
+  display: flex;
+  gap: 42px;
+  font-size: 1.5rem;
+  margin-left: 12px;
+}
+
+.info {
+  font-size: 1.7rem;
+  margin: 0;
+}
+
+.rise {
+  margin: 0;
+}
+.time {
+  font-size: 1.4rem;
 }
