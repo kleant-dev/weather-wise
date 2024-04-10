@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 import { createContext, useContext, useEffect, useState } from "react";
 
 const WeatherContext = createContext();
@@ -39,7 +41,7 @@ export default function WeatherProvider({ children }) {
         `http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=pGmwf201CfM0VAsuHftloI1iyhs0dgpV&q=${position.lat}%2C${position.lng}`
       );
       const data = await res.json();
-      setSearchQuery(data.EnglishName);
+
       setKey(data.Key);
     }
     if (position.lat && position.lng) {
@@ -67,8 +69,7 @@ export default function WeatherProvider({ children }) {
       setData(data);
     }
     fetchWeatherData();
-  }, []);
-  console.log(position);
+  }, [key]);
 
   return (
     <WeatherContext.Provider

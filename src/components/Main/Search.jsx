@@ -2,7 +2,7 @@ import styles from "./Search.module.css";
 
 function Search() {
   return (
-    <div className={styles.form}>
+    <form className={styles.form}>
       <input type="text" className={styles.input} placeholder="Tirana" />
       <button className={styles.button} type="submit">
         <svg
@@ -35,7 +35,7 @@ function Search() {
           </g>
         </svg>
       </button>
-    </div>
+    </form>
   );
 }
 

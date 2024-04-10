@@ -30,3 +30,11 @@
 .time {
   font-size: 1.4rem;
 }
+
+.day:hover {
+  cursor: pointer;
+  color: #22b8cf;
+}
+.active {
+  color: #22b8cf;
+}

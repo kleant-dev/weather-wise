@@ -1,80 +1,133 @@
-import React from "react";
+/* eslint-disable no-unused-vars */
 import Card from "../../ui/Card";
 import Footer from "./Footer";
 import styles from "./DetailedWeatherInfo.module.css";
+import { useWeather } from "../../context/weatherContext";
+import { useState } from "react";
+import { formatTime } from "../../helpers/formatTime";
 
 const DetailedWeatherInfo = () => {
-  return (
-    <>
-      <div className={styles.right}>
-        <header className={styles.header}>
-          <p>Today</p>
-          <p>Tomorrow</p>
-        </header>
-        <div className={styles["info-cards"]}>
-          <Card title="Wind">
-            <div>
-              <p className={styles.info}>17KM/h</p>
-              <p>West</p>
-            </div>
-          </Card>
-          <Card title="Humidity">
-            <p className={styles.info}>38%</p>
-          </Card>
-          <Card title="Real Feel">
-            <p className={styles.info}>5*C</p>
-          </Card>
-          <Card title="UV Index">
-            <div>
-              <p className={styles.info}>0</p>
-              <p>Low</p>
-            </div>
-          </Card>
-          <Card title="Pressure">
-            <div>
-              <p className={styles.info}>1005mbar</p>
-              <p>Rising</p>
-            </div>
-          </Card>
-          <Card title="Chance of rain">
-            <p className={styles.info}>40%</p>
-            <p>Day</p>
-          </Card>
-          <Card title="Temperature History">
-            <>
-              <div className={styles.temperature}>
-                <p className={styles.info}>9*C</p>
-                <p className={styles.info}>4*C</p>
+  const { data, current } = useWeather();
+  const [index, setIndex] = useState(0);
+  if (!data || !data.DailyForecasts) {
+    return <div>Loading...</div>; // or any loading indicator you prefer
+  }
+
+  // Check if the index is within bounds of the DailyForecasts array
+  if (index >= data.DailyForecasts.length) {
+    return <div>No forecast available for selected index.</div>;
+  }
+  if (current.length > 0)
+    return (
+      <>
+        <div className={styles.right}>
+          <header className={styles.header}>
+            <p
+              className={`${styles.day} ${index === 0 ? "active" : ""}`}
+              onClick={() => setIndex(0)}
+            >
+              Today
+            </p>
+            <p
+              className={`${styles.day} ${index === 1 ? "active" : ""}`}
+              onClick={() => setIndex(1)}
+            >
+              Tomorrow
+            </p>
+          </header>
+          <div className={styles["info-cards"]}>
+            <Card title="Wind">
+              <div>
+                <p className={styles.info}>
+                  {data.DailyForecasts[index].Day.Wind.Speed.Value}KM/h
+                </p>
+                <p>
+                  {data.DailyForecasts[index].Day.WindGust.Direction.English}
+                </p>
               </div>
-            </>
-          </Card>
-          <Card title="Sun">
-            <div>
-              <p className={styles.rise}>
-                Rise <span className={styles.time}>06:32 AM</span>
+            </Card>
+            <Card title="Humidity">
+              <p className={styles.info}>
+                {data.DailyForecasts[index].Day.RelativeHumidity.Average}%
               </p>
-              <p className={styles.set}>
-                Set <span className={styles.time}>07:26 PM</span>
+            </Card>
+            <Card title="Real Feel">
+              <p className={styles.info}>
+                {current[0].ApparentTemperature.Metric.Value}°C
               </p>
-            </div>
-          </Card>
-          <Card title="Moon">
-            <div>
-              <p className={styles.rise}>
-                Rise <span className={styles.time}>06:32 AM</span>
+            </Card>
+            <Card title="UV Index">
+              <div>
+                <p className={styles.info}>
+                  {data.DailyForecasts[index].AirAndPollen[5].Value}
+                </p>
+                <p>{data.DailyForecasts[index].AirAndPollen[5].Category}</p>
+              </div>
+            </Card>
+            <Card title="Pressure">
+              <div>
+                <p className={styles.info}>
+                  {current[0].Pressure.Metric.Value} mb
+                </p>
+                <p>{current[0].PressureTendency.LocalizedText}</p>
+              </div>
+            </Card>
+            <Card title="Chance of rain">
+              <p className={styles.info}>
+                {data.DailyForecasts[index].Day.RainProbability}%
               </p>
-              <p className={styles.set}>
-                Set <span className={styles.time}>07:26 PM</span>
-              </p>
-            </div>
-          </Card>
+            </Card>
+            <Card title="Temperature History">
+              <>
+                <div className={styles.temperature}>
+                  <p className={styles.info}>
+                    {data.DailyForecasts[index].Temperature.Maximum.Value}°C
+                  </p>
+                  <p className={styles.info}>
+                    {data.DailyForecasts[index].Temperature.Minimum.Value}°C
+                  </p>
+                </div>
+              </>
+            </Card>
+            <Card title="Sun">
+              <div>
+                <p className={styles.rise}>
+                  Rise{" "}
+                  <span className={styles.time}>
+                    {formatTime(data.DailyForecasts[index].Sun.Rise)}
+                  </span>
+                </p>
+                <p className={styles.set}>
+                  Set{" "}
+                  <span className={styles.time}>
+                    {formatTime(data.DailyForecasts[index].Sun.Set)}
+                  </span>
+                </p>
+              </div>
+            </Card>
+            <Card title="Moon">
+              <div>
+                <p className={styles.rise}>
+                  Rise{" "}
+                  <span className={styles.time}>
+                    {formatTime(data.DailyForecasts[index].Moon.Rise)}
+                  </span>
+                </p>
+                <p className={styles.set}>
+                  Set{" "}
+                  <span className={styles.time}>
+                    {formatTime(data.DailyForecasts[index].Moon.Set)}
+                  </span>
+                </p>
+              </div>
+            </Card>
+          </div>
+          <div>
+            <Footer />
+          </div>
         </div>
-        <div>
-          <Footer />
-        </div>
-      </div>
-    </>
-  );
+      </>
+    );
 };
 
 export default DetailedWeatherInfo;

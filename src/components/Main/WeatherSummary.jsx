@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./WeatherSummary.module.css";
 import { useWeather } from "../../context/weatherContext";
 
@@ -10,8 +10,8 @@ const dayName = date.toLocaleDateString("default", { weekday: "long" });
 
 export default function WeatherSummary() {
   const [time, setTime] = useState(new Date().toLocaleTimeString("default"));
-  const { current } = useWeather();
 
+  const { current } = useWeather();
   useEffect(() => {
     const timeInterval = setInterval(() => {
       setTime(new Date().toLocaleTimeString("default"));
@@ -22,7 +22,7 @@ export default function WeatherSummary() {
     return (
       <div className={styles.summary}>
         <img
-          src="/src/assets/34.svg"
+          src={`https://www.accuweather.com/images/weathericons/${current[0].WeatherIcon}.svg`}
           alt="weather-icon"
           className={styles.icon}
         />
@@ -30,7 +30,7 @@ export default function WeatherSummary() {
           <p className={styles.temperature}>
             {current[0].Temperature.Metric.Value}°C
           </p>
-          <p className={styles.status}>Sunny</p>
+          <p className={styles.status}>{current[0].WeatherText}</p>
         </div>
 
         <div className={styles.data}>
@@ -39,9 +39,9 @@ export default function WeatherSummary() {
           </p>
           <p className={styles.time}>
             {" "}
-            {dayName}, {time.slice(0, 4)} {time.slice(8)}
+            {dayName}, {time.slice(0, 5)} {time.slice(8)}
           </p>
-          <p className={styles.day}>{current[0].isDayTime ? "Day" : "Night"}</p>
+          <p className={styles.day}>{current[0].IsDayTime ? "Day" : "Night"}</p>
         </div>
       </div>
     );

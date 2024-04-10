@@ -1,4 +1,3 @@
-import React from "react";
 import Search from "./Search";
 import WeatherSummary from "./WeatherSummary";
 import styles from "./MainWeatherInfo.module.css";
