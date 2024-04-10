@@ -1,9 +1,23 @@
+import { useState } from "react";
+import { useWeather } from "../../context/weatherContext";
 import styles from "./Search.module.css";
 
 function Search() {
+  const { setSearchQuery } = useWeather();
+  const [query, setQuery] = useState("");
+  function handleSubmit(e) {
+    e.preventDefault();
+    setSearchQuery(query);
+  }
   return (
-    <form className={styles.form}>
-      <input type="text" className={styles.input} placeholder="Tirana" />
+    <form className={styles.form} onSubmit={handleSubmit}>
+      <input
+        type="text"
+        className={styles.input}
+        placeholder="Tirana"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+      />
       <button className={styles.button} type="submit">
         <svg
           xmlns="http://www.w3.org/2000/svg"

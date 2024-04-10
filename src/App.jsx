@@ -9,7 +9,6 @@ function App() {
         <div className="left">
           <div className="main">
             <MainWeatherInfo />
-            <p className="location">Tirana Albania</p>
           </div>
         </div>
 

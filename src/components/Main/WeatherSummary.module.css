@@ -50,6 +50,10 @@
   margin: 0;
 }
 
-.location {
-  position: end;
+.position {
+  color: #fd7e14;
+  position: absolute;
+  bottom: 16px;
+  font-size: 36px;
+  font-weight: 500;
 }

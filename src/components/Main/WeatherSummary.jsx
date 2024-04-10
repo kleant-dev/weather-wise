@@ -11,7 +11,7 @@ const dayName = date.toLocaleDateString("default", { weekday: "long" });
 export default function WeatherSummary() {
   const [time, setTime] = useState(new Date().toLocaleTimeString("default"));
 
-  const { current } = useWeather();
+  const { current, city } = useWeather();
   useEffect(() => {
     const timeInterval = setInterval(() => {
       setTime(new Date().toLocaleTimeString("default"));
@@ -39,10 +39,11 @@ export default function WeatherSummary() {
           </p>
           <p className={styles.time}>
             {" "}
-            {dayName}, {time.slice(0, 5)} {time.slice(8)}
+            {dayName}, {time.slice(0, 4)} {time.slice(8)}
           </p>
           <p className={styles.day}>{current[0].IsDayTime ? "Day" : "Night"}</p>
         </div>
+        <p className={styles.position}>{city}</p>
       </div>
     );
 }

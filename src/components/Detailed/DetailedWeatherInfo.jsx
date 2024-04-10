@@ -5,6 +5,7 @@ import styles from "./DetailedWeatherInfo.module.css";
 import { useWeather } from "../../context/weatherContext";
 import { useState } from "react";
 import { formatTime } from "../../helpers/formatTime";
+import getDayName from "../../helpers/getDayName";
 
 const DetailedWeatherInfo = () => {
   const { data, current } = useWeather();
@@ -33,6 +34,24 @@ const DetailedWeatherInfo = () => {
               onClick={() => setIndex(1)}
             >
               Tomorrow
+            </p>
+            <p
+              className={`${styles.day} ${index === 2 ? "active" : ""}`}
+              onClick={() => setIndex(2)}
+            >
+              {getDayName(data.DailyForecasts[2].Date)}
+            </p>
+            <p
+              className={`${styles.day} ${index === 3 ? "active" : ""}`}
+              onClick={() => setIndex(3)}
+            >
+              {getDayName(data.DailyForecasts[3].Date)}
+            </p>
+            <p
+              className={`${styles.day} ${index === 4 ? "active" : ""}`}
+              onClick={() => setIndex(4)}
+            >
+              {getDayName(data.DailyForecasts[4].Date)}
             </p>
           </header>
           <div className={styles["info-cards"]}>
